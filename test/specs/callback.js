@@ -1,9 +1,9 @@
 var assert = require('assert');
-var pwd = process.cwd();
 
 describe('Test callback', function() {
   function openCallbackMenu() {
-    browser.url('file://' + pwd + '/test/integration/html/callback.html');
+    browser.url('/test/integration/html/callback.html');
+    browser.waitForVisible('.context-menu-one');
     browser.rightClick('.context-menu-one');
     browser.waitForExist('#context-menu-layer');
     assert.equal(true, browser.isVisible('.context-menu-root'), 'menu is visible');

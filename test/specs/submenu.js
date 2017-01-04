@@ -1,21 +1,33 @@
 var assert = require('assert');
-var pwd = process.cwd();
-describe('Test submenus', function() {
+
+describe('Test submenus', function () {
     it('should navigate to submenu 2 levels deep and see correct alert for charlie', function () {
-        browser.url('file://' + pwd + '/test/integration/html/sub-menus.html');
+        browser.url('/test/integration/html/sub-menus_test.html');
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
-        browser.moveToObject('span=Sub group')
-        browser.moveToObject('span=Sub group 2')
-        browser.click('span=charlie')
-        assert.equal(browser.alertText(), 'clicked: fold2-key3');
-        browser.alertAccept();
+
+        browser.waitForVisible('span=Sub group');
+        browser.moveToObject('span=Sub group');
+        browser.moveToObject('span=Sub group 2');
+
+        browser.waitForVisible('span=charlie');
+        browser.leftClick('span=charlie');
+
+        var text = browser.getText('#msg');
+        assert.equal(text, 'clicked: fold2-key3');
+
     });
 
     it('should navigate to submenu 2 levels deep and see first menu highlighted', function () {
-        browser.url('file://' + pwd + '/test/integration/html/sub-menus.html');
+        browser.url('/test/integration/html/sub-menus_test.html');
+
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
-        browser.moveToObject('span=Sub group')
+
+        browser.waitForVisible('span=Sub group');
+        browser.moveToObject('span=Sub group');
         browser.moveToObject('span=Sub group 2');
+
         var elements = browser.elements('.context-menu-hover');
         assert.equal(2, elements.value.length);
     });

@@ -40,8 +40,8 @@
     "lodash": "^4.16.4",
     "qunitjs": "^2.0.1",
     "wdio-dot-reporter": "0.0.6",
-    "wdio-mocha-framework": "^0.4.4",
-    "wdio-sauce-service": "^0.2.5",
+    "wdio-mocha-framework": "^0.5.8",
+    "wdio-sauce-service": "^0.3.1",
     "wdio-selenium-standalone-service": "0.0.7",
     "webdriverio": "^4.2.16"
   },
@@ -85,6 +85,7 @@
   "scripts": {
     "test": "npm run test-unit",
     "test-unit": "./node_modules/karma/bin/karma start",
-    "test-sauce": "./node_modules/.bin/wdio wdio.conf.js"
+    "test-sauce": "./node_modules/.bin/wdio wdio.conf.js",
+    "test-sauce-locally": "./node_modules/.bin/wdio wdio.conf.js --baseUrl http://dev.local/jQuery-contextMenu/"
   }
 }

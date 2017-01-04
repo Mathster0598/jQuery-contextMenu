@@ -1,8 +1,8 @@
 var assert = require('assert');
-var pwd = process.cwd();
+
 describe('Test accesskeys', function() {
     it('should navigate to submenu 2 levels deep and see correct alert for charlie', function () {
-        browser.url('file://' + pwd + '/test/integration/html/sub-menus.html');
+        browser.url('/test/integration/html/sub-menus.html');
         browser.rightClick('.context-menu-one');
         browser.moveToObject('span=Sub group')
         browser.moveToObject('span=Sub group 2')
@@ -11,7 +11,8 @@ describe('Test accesskeys', function() {
         browser.alertAccept();
     });
     it('Typing <e> on keyboard triggers "edit" menu item callback', function () {
-        browser.url('file://' + pwd + '/test/integration/html/accesskeys.html');
+        browser.url('/test/integration/html/accesskeys.html');
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
         browser.keys('e');
         assert.equal(browser.alertText(), 'clicked: edit');
@@ -19,7 +20,8 @@ describe('Test accesskeys', function() {
     });
 
     it('Typing <c> on keyboard triggers "cut" menu item callback', function () {
-        browser.url('file://' + pwd + '/test/integration/html/accesskeys.html');
+        browser.url('/test/integration/html/accesskeys.html');
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
         browser.keys('c');
         assert.equal(browser.alertText(), 'clicked: cut');
@@ -27,7 +29,8 @@ describe('Test accesskeys', function() {
     });
 
     it('Typing <o> on keyboard triggers "copy" menu item callback', function () {
-        browser.url('file://' + pwd + '/test/integration/html/accesskeys.html');
+        browser.url('/test/integration/html/accesskeys.html');
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
         browser.keys('o');
         assert.equal(browser.alertText(), 'clicked: copy');
@@ -35,7 +38,8 @@ describe('Test accesskeys', function() {
     });
 
     it('Typing <p> on keyboard triggers "paste" menu item callback', function () {
-        browser.url('file://' + pwd + '/test/integration/html/accesskeys.html');
+        browser.url('/test/integration/html/accesskeys.html');
+        browser.waitForVisible('.context-menu-one');
         browser.rightClick('.context-menu-one');
         browser.keys('p');
         assert.equal(browser.alertText(), 'clicked: paste');

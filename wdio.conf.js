@@ -1,5 +1,32 @@
+var testedCapabilities = [];
+
+var capabilities = {
+    'Windows 10': {
+        'firefox': 47,
+        'chrome': 'latest',
+        'MicrosoftEdge': 'latest'
+    },
+    'macOS 10.12': {
+        'firefox': 47,
+        'chrome': 'latest'
+    }
+};
+
+var buildDate = new Date().toISOString();
+for (var osVersion in capabilities) {
+    for (var browserKey in capabilities[osVersion]) {
+        testedCapabilities.push({
+            maxInstances: 1,
+            browserName: browserKey,
+            version: capabilities[osVersion][browserKey],
+            name: osVersion + ' ' + browserKey + ' ' + capabilities[osVersion][browserKey],
+            build: buildDate
+        });
+    }
+}
+
 exports.config = {
-    
+
     //
     // =================
     // Service Providers
@@ -10,6 +37,7 @@ exports.config = {
     //
     user: process.env.SAUCE_USERNAME,
     key: process.env.SAUCE_ACCESS_KEY,
+    sauceConnect: true,
 
 
     //
@@ -44,20 +72,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 5,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instance available you can make sure that not more than
-        // 5 instance gets started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'chrome'
-    }],
+    capabilities: testedCapabilities,
     //
     // ===================
     // Test Configurations
@@ -80,10 +101,10 @@ exports.config = {
     //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
-    baseUrl: 'http://localhost',
+    baseUrl: 'http://dev.local/jQuery-contextMenu',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 10003,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -115,8 +136,8 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: ['selenium-standalone'],
-    services: ['selenium-standalone', 'sauce'],
-    // services: ['sauce'],
+    // services: ['selenium-standalone', 'sauce'],
+    services: ['sauce'],
 
     //
     // Framework you want to run your specs with.
@@ -131,12 +152,13 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/testrunner/reporters.html
     reporters: ['dot'],
-    
+
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: 20000
     },
     //
     // =====

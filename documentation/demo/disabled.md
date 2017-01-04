@@ -22,7 +22,7 @@ $(function(){
         selector: '.context-menu-one', 
         callback: function(key, options) {
             var m = "clicked: " + key;
-            window.console && console.log(m) || alert(m); 
+            alert(m); 
         },
         items: {
             "edit": {name: "Clickable", icon: "edit", disabled: false},
