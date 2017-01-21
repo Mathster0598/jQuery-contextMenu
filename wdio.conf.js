@@ -16,7 +16,7 @@ var buildDate = new Date().toISOString();
 for (var osVersion in capabilities) {
     for (var browserKey in capabilities[osVersion]) {
         testedCapabilities.push({
-            maxInstances: 1,
+            maxInstances: 5,
             browserName: browserKey,
             version: capabilities[osVersion][browserKey],
             name: osVersion + ' ' + browserKey + ' ' + capabilities[osVersion][browserKey],
